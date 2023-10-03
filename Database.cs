@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
-using Android.Graphics;
+//using Android.Graphics;
 
 /**
 Name: Danny & Jordyn
@@ -64,23 +64,6 @@ public class Database : IDatabase
             Console.WriteLine(airportToAdd);
         }
         return airports;
-        //string jsonAirports;
-
-        //// Use the JSON deserializer to check if the file exists.
-        //if (File.Exists(filename))
-        //{
-        //    jsonAirports = File.ReadAllText(filename);
-        //    airports = JsonSerializer.Deserialize<ObservableCollection<Airport>>(jsonAirports);
-        //}
-        //else
-        //{
-        //    // If the file doesn't exist, create a new empty collection and save it.
-        //    ObservableCollection<Airport> airports = new();
-        //    jsonAirports = JsonSerializer.Serialize(airports, options);
-        //    File.WriteAllText(filename, jsonAirports);
-        //}
-
-        //return airports;
     }
 
     // Writes the airport data to the JSON file.
@@ -119,17 +102,6 @@ public class Database : IDatabase
             SelectAllAirports(); // Question: why do we have to do this?
         }
         return numDeleted > 0;
-        //// Check if the airport with the specified ID exists.
-        //var airportToDelete = airports.FirstOrDefault(a => a.Id == id);
-
-        //if (airportToDelete == null)
-        //{
-        //    return false; // Airport not found.
-        //}
-
-        //// Remove the airport from the collection.
-        //airports.Remove(airportToDelete);
-        //return true; // No errors.
     }
 
     // Inserts a new airport into the collection.
@@ -155,24 +127,7 @@ public class Database : IDatabase
             return false;
         }
         return true;
-        //try
-        //{
-        //    // Check if an airport with the same ID already exists.
-        //    if (airports.Any(a => a.Id == airport.Id))
-        //    {
-        //        return false; // Airport with the same ID already exists.
-        //    }
 
-        //    // Add the airport to the collection.
-        //    airports.Add(airport);
-        //    return true; // Airport added successfully.
-        //}
-        //catch (Exception ex)
-        //{
-        //    // Handle any exceptions that may occur during insertion.
-        //    Console.WriteLine($"Error while adding airport: {ex.Message}");
-        //    return false; // Airport insertion failed due to an exception.
-        //}
     }
 
     // Updates an existing airport's information.
@@ -198,20 +153,7 @@ public class Database : IDatabase
             return false;
         }
         return true;
-        //foreach (var existingAirport in airports)
-        //{
-        //    if (airport.Id == existingAirport.Id)
-        //    {
-        //        // Update the airport with the new information.
-        //        existingAirport.City = airport.City;
-        //        existingAirport.DateVisited = airport.DateVisited;
-        //        existingAirport.Rating = airport.Rating;
 
-        //        return true; // Airport updated successfully.
-        //    }
-        //}
-
-        //return false; // Airport not found.
     }
     // Builds a ConnectionString, which is used to connect to the database
     static String GetConnectionString()
@@ -227,16 +169,7 @@ public class Database : IDatabase
         connStringBuilder.IncludeErrorDetail = true;
         return connStringBuilder.ConnectionString;
     }
-    // Fetches the password from the user secrets store (um, this works in VS, but not in the beta of VSC's C# extension)
-    //static String FetchPassword()
-    //{
-    //    //IConfiguration config = new ConfigurationBuilder().AddUserSecrets<Database>().Build();
-    //    //return config["CockroachDBPassword"] ?? ""; // this works in VS, not VSC
-    //}
-    // This is pretty straightforward - get a connection, open it, and make a command to invoke CREATE TABLE
-    // We execute the command at the same time as we create it (we don't need to store it)
-    // ExecuteNonQuery() means we are executing a SQL statement that is not a query (doesn't involve SELECT)
-    // We won't actually use this in MovieExtravaganza-SQLReady, we'll create the table at the command line
+
     static void CreateTable(string connString)
     {
         using var conn = new NpgsqlConnection(connString); // a conn represents a connection to the database
@@ -244,10 +177,6 @@ public class Database : IDatabase
         new NpgsqlCommand("CREATE TABLE IF NOT EXISTS airports (id VARCHAR(4) PRIMARY KEY, city VARCHAR(25), DateVisited TIMESTAMP, rating INT)", conn).ExecuteNonQuery();
     }
 
-    //internal bool DeleteAirport(ObservableCollection<Airport> airports)
-    //{
-    //    throw new NotImplementedException();
-    //}
 }
 
 

@@ -21,6 +21,9 @@ Reflection: The Business Logic class did not change.
     {
         // The BusinessLogic class talks to the Database
         private Database database;
+        private const int bronze = 42;
+        private const int silver = 84;
+        private const int gold = 125;
 
         // Create an observable collection of airports that returns the database method of all the airports
         public ObservableCollection<Airport> Airports
@@ -106,9 +109,7 @@ Reflection: The Business Logic class did not change.
         {
             // set a variable to get the count of how many airports have been added
             int airportCount = GetAirports().Count();
-            int bronze = 42;
-            int silver = 84;
-            int gold = 125;
+            
 
             // Check the number of airports for respective medal
             if (airportCount == 1)
