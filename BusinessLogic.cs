@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-
+using static Lab2.ErrorReporting;
 
 namespace Lab2
 /**
 Name: Danny Moczynski/ Jordyn Henrich
 Date: 10/1/2023
 Description: Lab 2, but now with a remote database
-Bugs: No Bugs
+Bugs: No output for bad user error. App will not crash or add, edit, or 
+delete airport - just no error prints. Have enums, but could could not get
+messages to print so reverted to original.
 Reflection: The Business Logic class did not change.
 **/
 {
@@ -28,7 +30,7 @@ Reflection: The Business Logic class did not change.
         // Create an observable collection of airports that returns the database method of all the airports
         public ObservableCollection<Airport> Airports
         {
-           get { return database.SelectAllAirports();  }
+            get { return database.SelectAllAirports(); }
         }
         // Constructor
         public BusinessLogic()
@@ -65,6 +67,7 @@ Reflection: The Business Logic class did not change.
             bool result = database.InsertAirport(new Airport(id, city, dateVisited, rating));
             return result;
         }
+
         /// <summary>
         /// Check if the id exists and if it does, then delete the airport.
         /// </summary>
@@ -109,7 +112,7 @@ Reflection: The Business Logic class did not change.
         {
             // set a variable to get the count of how many airports have been added
             int airportCount = GetAirports().Count();
-            
+
 
             // Check the number of airports for respective medal
             if (airportCount == 1)
@@ -144,3 +147,6 @@ Reflection: The Business Logic class did not change.
         }
     }
 }
+
+
+

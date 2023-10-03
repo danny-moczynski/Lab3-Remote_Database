@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Lab2.ErrorReporting;
+using static Lab2.ErrorReporting;
 
 namespace Lab2
 {
@@ -61,5 +63,6 @@ namespace Lab2
         /// </summary>
         /// <returns>An observable collection of airports.</returns>
         ObservableCollection<Airport> GetAirports();
+
     }
 }
